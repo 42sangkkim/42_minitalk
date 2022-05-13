@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:05:31 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/11 14:39:41 by sangkkim         ###   ########seoul.kr  */
+/*   Updated: 2022/05/12 16:28:49 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,66 @@
 #include <stdlib.h>
 #include <signal.h>
 
-void	send_sig(pid_t pid, unsigned char data);
+pid_t	get_pid(char *str);
+void	get_ack(int sig);
+void	send_a_byte(pid_t pid, unsigned char byte);
 
 int	main(int argc, char **argv)
 {
 	pid_t			server_pid;
-	unsigned char	buffer[1];
+	unsigned char	*data;
+	struct sigaction	client_sigaction;
 
-	if (argc < 2)
+	if (argc != 3)
 		return (-1);
-	server_pid = atoi(argv[1]);
-	while (1)
+	signal(SIGUSR1, get_ack);
+	server_pid = get_pid(argv[1]);
+	data = (unsigned char *)argv[2];
+	while (*data)
 	{
-		if (read(0, buffer, 1))
-			send_sig(server_pid, *buffer);
+		send_a_byte(server_pid, *data);
+		data++;
 	}
+	send_a_byte(server_pid, *data);
+	write(1, "complete!\n", 10);
 }
 
-void	send_sig(pid_t pid, unsigned char data)
+pid_t	get_pid(char *str)
 {
-	int	cnt;
+	pid_t	pid;
 
-	cnt = 0;
-	while (cnt < 8)
+	pid = 0;
+	while (*str)
 	{
-		if (data & 0x01)
-			kill(pid, SIGUSR2);
-		else
+		if (*str < '0' || '9' < *str)
+			exit(-1);
+		pid = pid * 10 + (*str - '0');
+		str++;
+	}
+	return (pid);
+}
+
+void	get_ack(int sig)
+{
+//	write(1, "ack\n", 4);
+}
+
+void	send_a_byte(pid_t pid, unsigned char byte)
+{
+	unsigned char	bit_mask;
+
+	bit_mask = 0b10000000;
+	while (bit_mask)
+	{
+		if ((bit_mask & byte) == 0)
+		{
 			kill(pid, SIGUSR1);
-		usleep(20);
-		data = data >> 1;
-		cnt++;
+		}
+		else
+		{
+			kill(pid, SIGUSR2);
+		}
+		bit_mask = bit_mask >> 1;
+		pause();
 	}
 }
