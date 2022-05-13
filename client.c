@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:05:31 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/12 16:28:49 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/13 18:08:11 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 {
 	pid_t			server_pid;
 	unsigned char	*data;
-	struct sigaction	client_sigaction;
 
 	if (argc != 3)
 		return (-1);
@@ -55,7 +54,8 @@ pid_t	get_pid(char *str)
 
 void	get_ack(int sig)
 {
-//	write(1, "ack\n", 4);
+	if (sig != SIGUSR1)
+		pause();
 }
 
 void	send_a_byte(pid_t pid, unsigned char byte)
