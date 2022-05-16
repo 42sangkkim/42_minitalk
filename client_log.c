@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:05:31 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/16 15:03:52 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:06:21 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,18 @@ void	send_a_byte(pid_t pid, unsigned char byte)
 	while (bit_mask)
 	{
 		if ((bit_mask & byte) == 0)
+		{
+			write(1, "0", 1);
 			kill(pid, SIGUSR1);
+		}
 		else
+		{
+			write(1, "1", 1);
 			kill(pid, SIGUSR2);
+		}
 		pause();
 		bit_mask = bit_mask << 1;
 		usleep(10);
 	}
+	write(1, "\n", 1);
 }

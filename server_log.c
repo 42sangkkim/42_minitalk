@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:09:24 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/16 14:59:47 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/16 15:09:32 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	push_buffer(unsigned int bit)
 	static unsigned int	cnt;
 
 	buffer |= bit << cnt++;
+	if (bit)
+		write(1, "1", 1);
+	else
+		write(1, "0", 1);
 	if (cnt == 8)
 	{
 		if (write_utf8((unsigned char *)&buffer, cnt) > 0)
@@ -74,6 +78,7 @@ void	push_buffer(unsigned int bit)
 				write(1, "\nreceive complete!\n", 19);
 			cnt = 0;
 			buffer = 0x00000000;
+			write(1, "\n", 1);
 		}
 	}
 	else if (cnt > 32)
@@ -86,13 +91,25 @@ void	push_buffer(unsigned int bit)
 int	write_utf8(unsigned char *buffer, unsigned int cnt)
 {
 	if (cnt == 8 && (*buffer & 0b10000000) == 0b00000000)
+	{
+		write(1, " 1byte ", 7);
 		return (write(1, buffer, 1));
+	}
 	else if (cnt == 16 && (*buffer & 0b11100000) == 0b11000000)
+	{
+		write(1, " 2byte ", 7);
 		return (write(1, buffer, 2));
+	}
 	else if (cnt == 24 && (*buffer & 0b11110000) == 0b11100000)
+	{
+		write(1, " 3byte ", 7);
 		return (write(1, buffer, 3));
+	}
 	else if (cnt == 32 && (*buffer & 0b11111000) == 0b11110000)
+	{
+		write(1, " 4byte ", 7);
 		return (write(1, buffer, 4));
+	}
 	else
 		return (0);
 }
