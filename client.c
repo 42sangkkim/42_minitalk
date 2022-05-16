@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:05:31 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/15 23:25:01 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:33:35 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ int	main(int argc, char **argv)
 	unsigned char	*data;
 
 	if (argc != 3)
-		return (-1);
-	signal(SIGUSR1, get_ack);
+		exit (-1);
+	if (signal(SIGUSR1, get_ack))
+		exit (-1);
 	server_pid = get_pid(argv[1]);
 	data = (unsigned char *)argv[2];
 	while (*data)
@@ -55,7 +56,10 @@ pid_t	get_pid(char *str)
 void	get_ack(int sig)
 {
 	if (sig != SIGUSR1)
+	{
+		write(1, "wrong ack\n", 10);
 		pause();
+	}
 }
 
 void	send_a_byte(pid_t pid, unsigned char byte)
@@ -66,9 +70,13 @@ void	send_a_byte(pid_t pid, unsigned char byte)
 	while (bit_mask)
 	{
 		if ((bit_mask & byte) == 0)
+		{
 			kill(pid, SIGUSR1);
+		}
 		else
+		{
 			kill(pid, SIGUSR2);
+		}
 		bit_mask = bit_mask >> 1;
 		pause();
 	}

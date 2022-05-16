@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 12:09:24 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/15 23:21:29 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/16 12:33:10 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@ int	main(void)
 	sigusr_action.sa_flags &= ~SA_RESETHAND;
 	sigusr_action.sa_flags |= SA_SIGINFO;
 	sigusr_action.sa_sigaction = my_sigaction;
-	sigaction(SIGUSR1, &sigusr_action, NULL);
-	sigaction(SIGUSR2, &sigusr_action, NULL);
+	if (sigaction(SIGUSR1, &sigusr_action, NULL) == -1)
+		exit(-1);
+	if (sigaction(SIGUSR2, &sigusr_action, NULL) == -1)
+		exit(-1);
 	while (1)
 		;
 	return (0);
@@ -65,7 +67,9 @@ void	push_buffer(unsigned int bit)
 	if (buffer & 0x100)
 	{
 		if (buffer & 0xFF)
+		{
 			write(1, &buffer, 1);
+		}
 		else
 			write(1, "\nreceive complete!\n", 19);
 		buffer = 1;
