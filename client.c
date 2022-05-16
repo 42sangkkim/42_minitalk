@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:05:31 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/05/13 18:08:11 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/05/15 23:25:01 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		data++;
 	}
 	send_a_byte(server_pid, *data);
-	write(1, "complete!\n", 10);
+	write(1, "send complete!\n", 15);
 }
 
 pid_t	get_pid(char *str)
@@ -66,13 +66,9 @@ void	send_a_byte(pid_t pid, unsigned char byte)
 	while (bit_mask)
 	{
 		if ((bit_mask & byte) == 0)
-		{
 			kill(pid, SIGUSR1);
-		}
 		else
-		{
 			kill(pid, SIGUSR2);
-		}
 		bit_mask = bit_mask >> 1;
 		pause();
 	}
