@@ -6,13 +6,15 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 22:38:26 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/08 13:35:25 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 02:01:55 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <signal.h>
+#include "../minitalk_bonus.h"
+#include "../utils.h"
 
 pid_t	rx_pid;
 int		rx_sig;

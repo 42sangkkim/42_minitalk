@@ -1,6 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/sangkkim/42Seoul/42cursus/minitalk'
+cc     server.c   -o server
 make: Leaving directory `/Users/sangkkim/42Seoul/42cursus/minitalk'
  
-make: *** No targets specified and no makefile found.  Stop.
-
