@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 01:06:54 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:03:18 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 02:21:48 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	print(const char *s)
 
 void	print_error(char *msg)
 {
-	const char	*prefix = "\033[0;31m [ERROR] ";
-	const char	*suffix = "\033[0;30m\n";
+	const char	*prefix = "\n\033[0;31m[ERROR] ";
+	const char	*suffix = "\n\033[0;30m";
 
 	print(prefix);
 	print(msg);
@@ -30,8 +30,8 @@ void	print_error(char *msg)
 
 void	print_warning(char *msg)
 {
-	const char	*prefix = "\033[0;33m [WARNING] ";
-	const char	*suffix = "\033[0;30m\n";
+	const char	*prefix = "\n\033[0;33m[WARNING] ";
+	const char	*suffix = "\n\033[0;30m";
 
 	print(prefix);
 	print(msg);
@@ -40,8 +40,8 @@ void	print_warning(char *msg)
 
 void	print_success(char *msg)
 {
-	const char	*prefix = "\033[0;32m [SUCCESS] ";
-	const char	*suffix = "\033[0;30m\n";
+	const char	*prefix = "\n\033[0;32m[SUCCESS] ";
+	const char	*suffix = "\n\033[0;30m";
 
 	print(prefix);
 	print(msg);

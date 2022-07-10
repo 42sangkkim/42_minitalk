@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 01:32:11 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:03:05 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 02:35:29 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_success(char *msg);
 void	put_unbr(unsigned int n);
 
 // utils2.c
-int	init_sigaction(struct sigaction *sa, \
+int		init_sigaction(struct sigaction *sa, \
 		void (*handler)(int, siginfo_t *, void *));
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 23:22:11 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:02:31 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 02:16:39 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_tx	g_tx;
 pid_t	get_pid(int argc, char **argv);
 void	handler(int sig, siginfo_t *siginfo, void *uap);
 void	send_data(unsigned char byte);
-void	ft_putnbr(size_t val);
 
 int	main(int argc, char **argv)
 {
