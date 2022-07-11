@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/11 01:32:11 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:35:29 by sangkkim         ###   ########.fr       */
+/*   Created: 2022/07/11 01:25:04 by sangkkim          #+#    #+#             */
+/*   Updated: 2022/07/11 11:05:37 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 
-# include <unistd.h>
-# include <signal.h>
+# define TIMEOUT 10000
 
-// utils1.c
-void	print(const char *s);
-void	print_error(char *msg);
-void	print_warning(char *msg);
-void	print_success(char *msg);
-void	put_unbr(unsigned int n);
+typedef struct s_tx
+{
+	int	pid;
+	int	sig;
+	int	echo_received;
+}	t_tx;
 
-// utils2.c
-int		init_sigaction(struct sigaction *sa, \
-		void (*handler)(int, siginfo_t *, void *));
+typedef struct s_rx
+{
+	int	pid;
+	int	sig;
+	int	flag;
+}	t_rx;
 
 #endif

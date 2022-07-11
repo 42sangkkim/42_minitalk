@@ -6,14 +6,14 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 23:22:11 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:16:39 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:46:22 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <signal.h>
-#include "../minitalk_bonus.h"
-#include "../utils.h"
+#include "minitalk_bonus.h"
+#include "utils_bonus.h"
 
 t_tx	g_tx;
 

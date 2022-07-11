@@ -6,13 +6,13 @@
 /*   By: sangkkim <sangkkim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 22:38:26 by sangkkim          #+#    #+#             */
-/*   Updated: 2022/07/11 02:35:15 by sangkkim         ###   ########.fr       */
+/*   Updated: 2022/07/11 11:46:11 by sangkkim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <signal.h>
-#include "../minitalk_bonus.h"
-#include "../utils.h"
+#include "minitalk_bonus.h"
+#include "utils_bonus.h"
 
 t_rx	g_rx;
 
